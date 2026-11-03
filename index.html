@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEP – High End Projects | Yann Brasseur</title>
+<meta name="description" content="HEP – High End Projects. Maîtrise d'œuvre d'exécution et assistance à maîtrise d'ouvrage pour projets résidentiels haut de gamme. Monaco · Côte d'Azur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#08111f; --navy-2:#0d1a2e; --navy-3:#13233b;
+  --gold:#c9935a; --gold-2:#e2b47c; --ivory:#f4efe7; --text:#d9dde5; --muted:#8b95a7;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Montserrat',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ivory);line-height:1.15}
+h2{font-size:clamp(2.1rem,4vw,3.2rem);margin:.6rem 0 1.4rem}
+.rule{width:56px;height:1px;background:var(--gold);margin:1.4rem 0}
+section{padding:120px 0;position:relative}
+
+/* i18n */
+[data-lang="en"] .fr, [data-lang="fr"] .en{display:none!important}
+
+/* nav */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(8,17,31,.92);backdrop-filter:blur(10px);border-color:rgba(201,147,90,.18)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;object-fit:contain}
+.brand span{font-weight:600;letter-spacing:.32em;color:var(--ivory);font-size:1rem}
+.menu{display:flex;gap:34px;align-items:center;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase}
+.menu a{color:var(--text);transition:color .25s}
+.menu a:hover{color:var(--gold)}
+.lang{display:flex;border:1px solid rgba(201,147,90,.45);border-radius:2px}
+.lang button{background:none;border:0;color:var(--muted);font:500 .7rem var(--sans);letter-spacing:.15em;padding:6px 10px;cursor:pointer}
+.lang button.on{background:var(--gold);color:var(--navy)}
+.burger{display:none;background:none;border:0;cursor:pointer;width:32px;height:24px;position:relative}
+.burger i{position:absolute;left:0;right:0;height:1px;background:var(--ivory);transition:.3s}
+.burger i:nth-child(1){top:4px}.burger i:nth-child(2){top:12px}.burger i:nth-child(3){top:20px}
+
+/* hero */
+.hero{min-height:100vh;padding:0;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(ellipse at 70% 40%,#16294a 0%,var(--navy) 65%)}
+.hero svg.lines{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;width:100%;position:relative;z-index:2;padding-top:110px}
+.hero-copy{padding-bottom:40px}
+.hero-logo{width:140px;margin-bottom:28px}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.6rem);font-weight:400}
+.hero h1 em{font-style:italic;color:var(--gold-2)}
+.tagline{margin-top:22px;border-left:1px solid var(--gold);padding-left:18px;font-size:.8rem;letter-spacing:.42em;text-transform:uppercase;line-height:2.2}
+.tagline b{font-weight:500;color:var(--gold)}
+.hero p.lead{margin-top:26px;max-width:520px;color:var(--text);font-size:1rem}
+.cta{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;border:1px solid var(--gold);transition:.3s}
+.btn.solid{background:var(--gold);color:var(--navy)}
+.btn.solid:hover{background:var(--gold-2)}
+.btn:not(.solid):hover{background:rgba(201,147,90,.12)}
+.hero-portrait{align-self:center;justify-self:end;position:relative;width:min(400px,100%);aspect-ratio:3/4.4;margin-top:20px}
+.hero-portrait:before{content:"";position:absolute;inset:-16px 16px 16px -16px;border:1px solid var(--gold);border-radius:999px 999px 0 0;opacity:.7}
+.hero-portrait img{position:relative;width:100%;height:100%;object-fit:cover;object-position:50% 8%;border-radius:999px 999px 0 0;
+  box-shadow:0 40px 80px rgba(0,0,0,.45)}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;width:1px;height:54px;background:linear-gradient(var(--gold),transparent)}
+
+/* stats */
+.stats{padding:0;background:var(--navy-2);border-top:1px solid rgba(201,147,90,.2);border-bottom:1px solid rgba(201,147,90,.2)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:44px 20px;text-align:center;border-right:1px solid rgba(201,147,90,.15)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-family:var(--serif);font-size:3rem;font-weight:500;color:var(--gold-2);line-height:1}
+.stat span{display:block;margin-top:10px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:center}
+.about-img{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:380px;z-index:0}
+.about-img img{width:100%;aspect-ratio:1;object-fit:cover}
+.about-img img:nth-child(2){margin-top:40px}.about-img img:nth-child(3){margin-top:-40px}
+.about-img:after{content:"";position:absolute;inset:22px -22px -22px 22px;border:1px solid var(--gold);z-index:-1}
+.about p{margin-bottom:1.1rem}
+.signature{font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--gold-2);margin-top:1.4rem}
+.signature small{display:block;font-family:var(--sans);font-style:normal;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* services */
+.services{background:var(--navy-2)}
+.svc-head{max-width:720px;margin-bottom:60px}
+.missions{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:70px}
+.mission{border:1px solid rgba(201,147,90,.3);padding:44px 40px;background:linear-gradient(160deg,rgba(201,147,90,.06),transparent 60%)}
+.mission .num{font-family:var(--serif);font-size:1rem;color:var(--gold)}
+.mission h3{font-size:1.9rem;margin:.4rem 0 .2rem}
+.mission .abbr{font-size:.7rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(201,147,90,.18);border:1px solid rgba(201,147,90,.18)}
+.skill{background:var(--navy-2);padding:32px 26px;transition:background .3s}
+.skill:hover{background:var(--navy-3)}
+.skill svg{width:30px;height:30px;stroke:var(--gold);fill:none;stroke-width:1.2;margin-bottom:16px}
+.skill h4{font-family:var(--sans);font-weight:500;color:var(--ivory);font-size:.92rem;margin-bottom:6px}
+.skill p{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* references */
+.refs-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:60px;flex-wrap:wrap}
+.refs-head p{max-width:440px;color:var(--muted)}
+.ref{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:center;margin-bottom:96px}
+.ref:nth-child(even){grid-template-columns:6fr 5fr}.ref:nth-child(even) .ref-gal{order:2}
+.ref-gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:70px;gap:8px}
+.ref-gal img{width:100%;height:100%;object-fit:cover;filter:saturate(.92);transition:transform .6s,filter .4s;cursor:zoom-in}
+.ref-gal figure{overflow:hidden;background:var(--navy-3)}
+.ref-gal figure:hover img{transform:scale(1.05);filter:saturate(1.1)}
+.g-a{grid-column:span 4;grid-row:span 3}.g-b{grid-column:span 2;grid-row:span 3}
+.g-c{grid-column:span 2;grid-row:span 2}.g-d{grid-column:span 3;grid-row:span 2}.g-e{grid-column:span 6;grid-row:span 3}
+.g-f{grid-column:span 3;grid-row:span 3}
+.ref .years{font-size:.72rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.ref h3{font-size:2.1rem;margin:.5rem 0 .3rem}
+.ref .role{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.ref .meta{display:flex;gap:34px;margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid rgba(201,147,90,.2)}
+.ref .meta div span{display:block;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.ref .meta div b{font-family:var(--serif);font-size:1.6rem;font-weight:500;color:var(--gold-2)}
+.ref a.ext{display:inline-block;margin-top:1rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid currentColor}
+.more{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.mini{background:var(--navy-2);border:1px solid rgba(201,147,90,.15)}
+.mini img{width:100%;aspect-ratio:16/9;object-fit:cover;cursor:zoom-in}
+.mini > div{padding:22px 22px 26px}
+.mini h4{font-family:var(--serif);font-weight:500;font-size:1.35rem;color:var(--ivory);margin:.3rem 0}
+.mini p{font-size:.85rem;color:var(--muted)}
+.mini .years{font-size:.66rem;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+
+/* approach */
+.approach{background:radial-gradient(ellipse at 30% 60%,#16294a 0%,var(--navy) 70%);padding:150px 0;text-align:center;overflow:hidden}
+.approach svg.lines{position:absolute;inset:0;width:100%;height:100%;opacity:.35;pointer-events:none;transform:scaleX(-1)}
+.approach .wrap{position:relative}
+.approach blockquote{font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.7rem);color:var(--ivory);max-width:880px;margin:1.2rem auto;line-height:1.35;font-style:italic}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:64px;text-align:left}
+.step{border-top:1px solid var(--gold);padding-top:20px}
+.step b{font-family:var(--serif);color:var(--gold-2);font-size:1.2rem;font-weight:500}
+.step p{font-size:.86rem;color:var(--text);margin-top:6px}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.cinfo a,.cinfo div.line{display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid rgba(201,147,90,.2);font-size:1.05rem;color:var(--ivory);transition:color .25s}
+.cinfo a:hover{color:var(--gold-2)}
+.cinfo .ic{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;flex:none}
+.cinfo .ic svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.4}
+form{display:grid;gap:18px}
+label{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+input,textarea,select{width:100%;margin-top:6px;background:transparent;border:0;border-bottom:1px solid rgba(201,147,90,.4);color:var(--ivory);font:300 1rem var(--sans);padding:10px 0;outline:none}
+select option{background:var(--navy)}
+input:focus,textarea:focus{border-color:var(--gold)}
+textarea{min-height:110px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+form .btn{justify-self:start;cursor:pointer;font-family:var(--sans)}
+
+footer{border-top:1px solid rgba(201,147,90,.2);padding:40px 0;font-size:.75rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(4,8,15,.94);display:none;place-items:center;z-index:100;padding:24px;cursor:zoom-out}
+.lb.on{display:grid}
+.lb img{max-width:min(1000px,100%);max-height:86vh;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb p{color:var(--muted);text-align:center;margin-top:14px;font-size:.8rem;letter-spacing:.12em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:960px){
+  section{padding:84px 0}
+  .menu{position:fixed;inset:78px 0 auto 0;background:rgba(8,17,31,.98);flex-direction:column;gap:0;padding:10px 24px 24px;transform:translateY(-130%);transition:transform .4s;border-bottom:1px solid rgba(201,147,90,.2)}
+  .menu.open{transform:none}
+  .menu a{padding:14px 0;width:100%;border-bottom:1px solid rgba(255,255,255,.05)}
+  .menu .lang{margin-top:16px}
+  .burger{display:block}
+  .hero .wrap{grid-template-columns:1fr;padding-top:100px}
+  .hero-copy{padding-bottom:0}
+  .hero-portrait{justify-self:center;width:min(320px,82%);margin:30px auto 60px}
+  .stats .wrap{grid-template-columns:1fr 1fr;padding:0}
+  .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid rgba(201,147,90,.15)}
+  .about .wrap,.missions,.ref,.contact .wrap{grid-template-columns:1fr;gap:44px}
+  .ref:nth-child(even) .ref-gal{order:0}
+  .skills{grid-template-columns:1fr 1fr}
+  .more{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .about-img{max-width:340px}
+  .ref:nth-child(even){grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .skills,.steps,.row2,.more{grid-template-columns:1fr}
+  .ref-gal{grid-auto-rows:60px}
+  .mission{padding:32px 24px}
+  .stat b{font-size:2.3rem}
+  .ref .meta{gap:22px;flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body data-lang="fr">
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#accueil" class="brand"><img src="img/logo-banner.png" alt="HEP"><span>HEP</span></a>
+    <nav class="menu" id="menu">
+      <a href="#apropos"><span class="fr">À propos</span><span class="en">About</span></a>
+      <a href="#services"><span class="fr">Expertise</span><span class="en">Expertise</span></a>
+      <a href="#references"><span class="fr">Références</span><span class="en">Projects</span></a>
+      <a href="#contact"><span class="fr">Contact</span><span class="en">Contact</span></a>
+      <div class="lang"><button data-set="fr" class="on">FR</button><button data-set="en">EN</button></div>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<section class="hero" id="accueil">
+  <svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#c9935a" stop-opacity="0"/><stop offset=".5" stop-color="#e2b47c"/><stop offset="1" stop-color="#c9935a" stop-opacity="0"/></linearGradient></defs>
+    <g fill="none" stroke="url(#g)" stroke-width=".7" id="waves"></g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-copy reveal">
+      <img class="hero-logo" src="img/logo-full.png" alt="HEP – High End Projects">
+      <p class="eyebrow">High End Projects · Monaco · <span class="fr">Côte d'Azur</span><span class="en">French Riviera</span></p>
+      <h1 style="margin-top:14px">
+        <span class="fr">Vos projets d'exception,<br><em>maîtrisés de A à Z.</em></span>
+        <span class="en">Exceptional projects,<br><em>delivered with precision.</em></span>
+      </h1>
+      <div class="tagline">From vision<br><b>to execution</b></div>
+      <p class="lead">
+        <span class="fr">Maîtrise d'œuvre d'exécution et assistance à maîtrise d'ouvrage pour la rénovation lourde de résidences haut de gamme. 22 ans d'expérience, dans les délais et le budget.</span>
+        <span class="en">Construction management and owner's representation for high-end residential heavy refurbishment. 22 years of experience, on time and on budget.</span>
+      </p>
+      <div class="cta">
+        <a href="#contact" class="btn solid"><span class="fr">Parlons de votre projet</span><span class="en">Discuss your project</span></a>
+        <a href="#references" class="btn"><span class="fr">Voir les références</span><span class="en">View projects</span></a>
+      </div>
+    </div>
+    <div class="hero-portrait"><img src="img/portrait.jpg" alt="Yann Brasseur"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stat"><b>22</b><span class="fr">ans d'expérience</span><span class="en">years of experience</span></div>
+    <div class="stat"><b>85 M€+</b><span class="fr">de travaux pilotés</span><span class="en">of works delivered</span></div>
+    <div class="stat"><b>8</b><span class="fr">projets de référence</span><span class="en">flagship projects</span></div>
+    <div class="stat"><b>FR · EN</b><span class="fr">bilingue</span><span class="en">bilingual</span></div>
+  </div>
+</section>
+
+<section class="about" id="apropos">
+  <div class="wrap">
+    <div class="about-img reveal"><img src="img/be-library.jpg" alt=""><img src="img/lestra-villa.jpg" alt=""><img src="img/be-stairs.jpg" alt=""><img src="img/yc-interior.jpg" alt=""></div>
+    <div class="reveal">
+      <p class="eyebrow"><span class="fr">Le fondateur</span><span class="en">The founder</span></p>
+      <h2>Yann Brasseur</h2>
+      <div class="fr">
+        <p>Fondateur et Président de HEP – High End Projects, je suis chef de projet spécialisé dans la rénovation lourde de résidences haut de gamme.</p>
+        <p>Depuis 22 ans, en tant que Directeur de projet et Responsable de travaux, j'ai conduit des chantiers allant de l'aménagement de bureaux aux villas privées d'exception, en passant par des hôtels 5 étoiles et des bâtiments emblématiques de Monaco.</p>
+        <p>Ma priorité est simple : livrer chaque projet dans les délais et dans le budget, en étant votre unique interlocuteur face aux entreprises.</p>
+      </div>
+      <div class="en">
+        <p>Founder and President of HEP – High End Projects, I am a project manager specialised in high-end residential heavy refurbishment.</p>
+        <p>For 22 years, as Project Director and Site Manager, I have delivered projects ranging from office fit-outs to exceptional private villas, including 5-star hotels and landmark buildings in Monaco.</p>
+        <p>My priority is simple: deliver every project on time and within budget, acting as your single point of contact with contractors.</p>
+      </div>
+      <p class="signature">Yann Brasseur<small><span class="fr">Fondateur &amp; Président</span><span class="en">Founder &amp; President</span></small></p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-head reveal">
+      <p class="eyebrow"><span class="fr">Expertise</span><span class="en">Expertise</span></p>
+      <h2><span class="fr">Deux missions, un seul objectif : votre projet.</span><span class="en">Two services, one goal: your project.</span></h2>
+    </div>
+    <div class="missions">
+      <div class="mission reveal">
+        <div class="num">01</div>
+        <h3><span class="fr">Maîtrise d'œuvre d'exécution</span><span class="en">Construction management</span></h3>
+        <div class="abbr">MOEX</div>
+        <p class="fr">Pilotage opérationnel du chantier : coordination de tous les corps d'état, planification, suivi des coûts, contrôle de la qualité et réception des travaux.</p>
+        <p class="en">Hands-on site leadership: coordination of all trades, programming, cost tracking, quality control and handover.</p>
+      </div>
+      <div class="mission reveal">
+        <div class="num">02</div>
+        <h3><span class="fr">Assistance à maîtrise d'ouvrage</span><span class="en">Owner's representation</span></h3>
+        <div class="abbr">AMO</div>
+        <p class="fr">Représentation du client à chaque étape : définition du besoin, consultation des entreprises, administration des contrats et défense de vos intérêts jusqu'à la livraison.</p>
+        <p class="en">Acting on the client's behalf at every stage: brief definition, contractor tendering, contract administration and protecting your interests through to completion.</p>
+      </div>
+    </div>
+    <div class="skills reveal">
+      <div class="skill"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg><h4><span class="fr">Représentation client</span><span class="en">Client representative</span></h4><p class="fr">Votre interlocuteur unique sur le projet.</p><p class="en">Your single point of contact.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M8 4v16"/></svg><h4><span class="fr">Gestion de projet</span><span class="en">Project management</span></h4><p class="fr">Coordination de l'ensemble des intervenants.</p><p class="en">Coordination of every stakeholder.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg><h4><span class="fr">Maîtrise des coûts</span><span class="en">Cost management</span></h4><p class="fr">Budget suivi et tenu, poste par poste.</p><p class="en">Budget tracked and held, line by line.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h4><span class="fr">Planification</span><span class="en">Programme management</span></h4><p class="fr">Planning maîtrisé et délais respectés.</p><p class="en">Controlled schedule, deadlines met.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg><h4><span class="fr">Administration des contrats</span><span class="en">Contract administration</span></h4><p class="fr">Marchés, avenants et situations de travaux.</p><p class="en">Contracts, variations and valuations.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h4><span class="fr">Gestion des risques</span><span class="en">Risk management</span></h4><p class="fr">Anticiper plutôt que subir.</p><p class="en">Anticipate rather than react.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="9" r="3"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M14 15.5c.9-.3 1.9-.5 3-.5 3.3 0 5 2 5 5"/></svg><h4><span class="fr">Pilotage des entreprises</span><span class="en">Subcontractor management</span></h4><p class="fr">Corps d'état coordonnés et contrôlés.</p><p class="en">Trades coordinated and supervised.</p></div>
+      <div class="skill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.8 3.7 5.8 3.7 9s-1.2 6.2-3.7 9c-2.5-2.8-3.7-5.8-3.7-9S9.5 5.8 12 3z"/></svg><h4><span class="fr">Bilingue français-anglais</span><span class="en">Bilingual French-English</span></h4><p class="fr">Pour une clientèle internationale.</p><p class="en">For an international clientele.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="refs" id="references">
+  <div class="wrap">
+    <div class="refs-head reveal">
+      <div>
+        <p class="eyebrow"><span class="fr">Références</span><span class="en">Selected projects</span></p>
+        <h2 style="margin-bottom:0"><span class="fr">Des réalisations d'exception</span><span class="en">Landmark projects</span></h2>
+      </div>
+      <p><span class="fr">Résidences privées, hôtels de prestige et bâtiments emblématiques à Monaco et au-delà.</span><span class="en">Private residences, prestige hotels and landmark buildings in Monaco and beyond.</span></p>
+    </div>
+
+    <div class="ref-list">
+      <article class="ref reveal">
+        <div class="ref-gal">
+          <figure class="g-a"><img src="img/be-library.jpg" alt="Belle Époque"></figure>
+          <figure class="g-b"><img src="img/be-stairs.jpg" alt="Belle Époque"></figure>
+          <figure class="g-c"><img src="img/be-arch.jpg" alt="Belle Époque"></figure>
+          <figure class="g-c"><img src="img/be-bedroom.jpg" alt="Belle Époque"></figure>
+          <figure class="g-c"><img src="img/be-cinema.jpg" alt="Belle Époque"></figure>
+        </div>
+        <div>
+          <div class="years">2004 – 2010 · Richelmi Monaco (Bouygues)</div>
+          <h3><span class="fr">Rénovation haut de gamme du Belle Époque</span><span class="en">High-end renovation of the Belle Époque</span></h3>
+          <div class="role"><span class="fr">Chef de projet</span><span class="en">Project manager</span></div>
+          <p class="fr">Rénovation complète d'une résidence d'exception : bibliothèque, salle de cinéma, suites et escalier monumental.</p>
+          <p class="en">Complete renovation of an exceptional residence: library, private cinema, suites and grand staircase.</p>
+          <div class="meta"><div><span class="fr">Durée</span><span class="en">Duration</span><b class="fr">24 mois</b><b class="en">24 months</b></div><div><span class="fr">Montant</span><span class="en">Value</span><b>9,5 M€</b></div></div>
+          <a class="ext" href="https://youtu.be/lObHAHSB8vk" target="_blank" rel="noopener"><span class="fr">Voir la vidéo</span><span class="en">Watch the video</span> ↗</a>
+        </div>
+      </article>
+
+      <article class="ref reveal">
+        <div class="ref-gal">
+          <figure class="g-a"><img src="img/lestra-villa.jpg" alt="La Lestra"></figure>
+          <figure class="g-b"><img src="img/lestra-bath.jpg" alt="La Lestra"></figure>
+          <figure class="g-e"><img src="img/lestra-lounge.jpg" alt="La Lestra"></figure>
+        </div>
+        <div>
+          <div class="years">2012 – 2015 · Richelmi Monaco (Bouygues)</div>
+          <h3><span class="fr">Triplex de 1 300 m² – La Lestra</span><span class="en">1,300 m² triplex – La Lestra</span></h3>
+          <div class="role"><span class="fr">Directeur de projet · Responsable TCE</span><span class="en">Project director · All-trades lead</span></div>
+          <p class="fr">Réalisation tous corps d'état d'un triplex d'exception avec piscine et intérieurs sur mesure.</p>
+          <p class="en">All-trades delivery of an exceptional triplex with pool and bespoke interiors.</p>
+          <div class="meta"><div><span class="fr">Durée</span><span class="en">Duration</span><b class="fr">12 mois</b><b class="en">12 months</b></div><div><span class="fr">Montant</span><span class="en">Value</span><b>15 M€</b></div></div>
+          <a class="ext" href="https://www.lalestra.com" target="_blank" rel="noopener">lalestra.com ↗</a>
+        </div>
+      </article>
+
+      <article class="ref reveal">
+        <div class="ref-gal">
+          <figure class="g-e"><img src="img/yacht-club.jpg" alt="Yacht Club de Monaco"></figure>
+          <figure class="g-f"><img src="img/yc-interior.jpg" alt="Yacht Club de Monaco"></figure>
+          <figure class="g-f"><img src="img/yc-bath.jpg" alt="Yacht Club de Monaco"></figure>
+        </div>
+        <div>
+          <div class="years">2010 – 2011 · Engeco</div>
+          <h3><span class="fr">Nouveau Yacht Club de Monaco</span><span class="en">New Yacht Club de Monaco</span></h3>
+          <div class="role"><span class="fr">Ingénieur principal gros œuvre</span><span class="en">Lead structural works engineer</span></div>
+          <p class="fr">Responsable du gros œuvre du nouveau Yacht Club de Monaco, conçu par Norman Foster.</p>
+          <p class="en">In charge of structural works for the new Yacht Club de Monaco, designed by Norman Foster.</p>
+          <div class="meta"><div><span class="fr">Durée</span><span class="en">Duration</span><b class="fr">24 mois</b><b class="en">24 months</b></div><div><span class="fr">Montant</span><span class="en">Value</span><b>19 M€</b></div></div>
+        </div>
+      </article>
+
+      <article class="ref reveal">
+        <div class="ref-gal">
+          <figure class="g-b"><img src="img/giroflees.jpg" alt="Tour des Giroflées"></figure>
+          <figure class="g-a"><img src="img/giroflees-site.jpg" alt="Tour des Giroflées"></figure>
+          <figure class="g-e"><img src="img/monaco-site.jpg" alt="Tour des Giroflées"></figure>
+        </div>
+        <div>
+          <div class="years">Léon Grosse Monaco</div>
+          <h3>Tour des Giroflées</h3>
+          <div class="role"><span class="fr">Responsable CES</span><span class="en">Head of execution &amp; synthesis unit</span></div>
+          <p class="fr">Gestion et pilotage de la cellule CES (4 ETAM/cadres) de la Tour des Giroflées, opération de 27 M€.</p>
+          <p class="en">Managed the execution &amp; synthesis unit (team of 4) for the Tour des Giroflées, a €27m development.</p>
+          <div class="meta"><div><span class="fr">Durée</span><span class="en">Duration</span><b class="fr">24 mois</b><b class="en">24 months</b></div><div><span class="fr">Montant</span><span class="en">Value</span><b>12 M€</b></div></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="more">
+      <div class="mini reveal"><img src="img/mcbeach.jpg" alt="Monte-Carlo Beach"><div><div class="years">Richelmi Monaco · 6 <span class="fr">mois</span><span class="en">months</span> · 8 M€</div><h4><span class="fr">Monte-Carlo Beach Hôtel 5*</span><span class="en">Monte-Carlo Beach Hotel 5*</span></h4><p class="fr">Chef de projet – réhabilitation de l'hôtel.</p><p class="en">Project manager – hotel refurbishment.</p></div></div>
+      <div class="mini reveal"><img src="img/hermitage-site.jpg" alt="Hermitage"><div><div class="years">Richelmi Monaco · 16 <span class="fr">mois</span><span class="en">months</span> · 11 M€</div><h4><span class="fr">L'Hermitage – phase 2</span><span class="en">The Hermitage – phase 2</span></h4><p class="fr">Responsable gros œuvre / RSO.</p><p class="en">Structural works lead.</p></div></div>
+      <div class="mini reveal"><img src="img/chpg-room.jpg" alt="CHPG"><div><div class="years">2015 · SATRI Groupe Marzocco · 12 <span class="fr">mois</span><span class="en">months</span> · 8 M€</div><h4><span class="fr">Centre Hospitalier Princesse Grace</span><span class="en">Princess Grace Hospital</span></h4><p class="fr">Directeur de projet – réaffectation de logements en unités de soins.</p><p class="en">Project director – conversion of housing into care units.</p></div></div>
+      <div class="mini reveal"><img src="img/rsma.jpg" alt="RSMA"><div><div class="years">2011 – 2012 · GTOI (Bouygues) · 12 <span class="fr">mois</span><span class="en">months</span> · 6 M€</div><h4><span class="fr">Mess militaire – Saint-Pierre, La Réunion</span><span class="en">Military mess – Saint-Pierre, Réunion</span></h4><p class="fr">Responsable travaux TCE de l'extension.</p><p class="en">All-trades site manager for the extension.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="approach">
+  <svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="url(#g)" stroke-width=".7" class="w2"></g></svg>
+  <div class="wrap">
+    <p class="eyebrow"><span class="fr">L'approche HEP</span><span class="en">The HEP approach</span></p>
+    <blockquote>
+      <span class="fr">« Un projet d'exception mérite une exécution sans compromis : dans les délais, dans le budget, sans surprise. »</span>
+      <span class="en">"An exceptional project deserves uncompromising execution: on time, on budget, no surprises."</span>
+    </blockquote>
+    <div class="steps">
+      <div class="step reveal"><b>01 · <span class="fr">Écouter</span><span class="en">Listen</span></b><p class="fr">Comprendre vos ambitions, vos contraintes et votre budget.</p><p class="en">Understand your ambitions, constraints and budget.</p></div>
+      <div class="step reveal"><b>02 · <span class="fr">Structurer</span><span class="en">Structure</span></b><p class="fr">Planning, budget, consultation et contrats des entreprises.</p><p class="en">Programme, budget, tendering and contractor contracts.</p></div>
+      <div class="step reveal"><b>03 · <span class="fr">Piloter</span><span class="en">Lead</span></b><p class="fr">Présence terrain, coordination et maîtrise des risques.</p><p class="en">On-site presence, coordination and risk control.</p></div>
+      <div class="step reveal"><b>04 · <span class="fr">Livrer</span><span class="en">Deliver</span></b><p class="fr">Réception, levée des réserves et remise des clés.</p><p class="en">Handover, snagging and key delivery.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Contact</p>
+      <h2><span class="fr">Parlons de votre projet</span><span class="en">Let's talk about your project</span></h2>
+      <p style="color:var(--muted);margin-bottom:24px"><span class="fr">Rénovation de villa, appartement ou hôtel à Monaco et sur la Côte d'Azur : je vous réponds sous 24 h.</span><span class="en">Villa, apartment or hotel refurbishment in Monaco and on the French Riviera: I reply within 24 hours.</span></p>
+      <div class="cinfo">
+        <a href="tel:+33781397061"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></span>+33 7 81 39 70 61</a>
+        <a href="mailto:yann@heprojects.fr"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 6l9 7 9-7"/></svg></span>yann@heprojects.fr</a>
+        <a href="https://www.linkedin.com/in/yann-brasseur-hep/" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-7M12 13a3 3 0 0 1 6 0v4"/></svg></span>LinkedIn</a>
+        <div class="line"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>Monaco · <span class="fr">Côte d'Azur</span><span class="en">French Riviera</span></div>
+      </div>
+    </div>
+    <form class="reveal" id="form">
+      <div class="row2">
+        <label><span class="fr">Nom</span><span class="en">Name</span><input name="name" required></label>
+        <label>Email<input name="email" type="email" required></label>
+      </div>
+      <div class="row2">
+        <label><span class="fr">Téléphone</span><span class="en">Phone</span><input name="phone"></label>
+        <label><span class="fr">Type de projet</span><span class="en">Project type</span>
+          <select name="type"><option>Villa</option><option>Appartement / Apartment</option><option>Hôtel / Hotel</option><option>Bureaux / Offices</option><option>Autre / Other</option></select></label>
+      </div>
+      <label>Message<textarea name="msg" required></textarea></label>
+      <button class="btn solid" type="submit"><span class="fr">Envoyer</span><span class="en">Send</span></button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr"></span> HEP – High End Projects · Yann Brasseur</div>
+    <div><span class="fr">Maîtrise d'œuvre d'exécution &amp; AMO · Monaco · Côte d'Azur</span><span class="en">Construction management &amp; owner's representation · Monaco · French Riviera</span></div>
+  </div>
+</footer>
+
+<div class="lb" id="lb"><div><img alt=""><p></p></div></div>
+
+<script>
+// language
+const setLang=l=>{document.body.dataset.lang=l;document.documentElement.lang=l;
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.set===l));
+  try{localStorage.setItem('hep-lang',l)}catch(e){}};
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.set));
+let saved=null;try{saved=localStorage.getItem('hep-lang')}catch(e){}
+setLang(saved||((navigator.language||'fr').startsWith('fr')?'fr':'en'));
+// nav
+const hdr=document.querySelector('header'),menu=document.getElementById('menu');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40),{passive:true});
+document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
+// waves
+const g=document.getElementById('waves');let d='';
+for(let i=0;i<34;i++){const o=i*9;d+=`<path d="M-50 ${520+o} C 350 ${260+o*1.6}, 800 ${900-o}, 1500 ${180+o*1.2}" opacity="${(0.15+0.85*Math.sin(i/34*Math.PI)).toFixed(2)}"/>`}
+g.innerHTML=d;document.querySelectorAll('.w2').forEach(x=>x.innerHTML=d);
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// lightbox
+const lb=document.getElementById('lb');
+document.querySelectorAll('.ref-gal img,.mini img').forEach(im=>im.onclick=()=>{lb.querySelector('img').src=im.src;lb.querySelector('p').textContent=im.alt;lb.classList.add('on')});
+lb.onclick=()=>lb.classList.remove('on');
+// form -> mailto
+document.getElementById('form').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);
+  const body=`${f.get('msg')}\n\n${f.get('name')}\n${f.get('email')}\n${f.get('phone')||''}`;
+  location.href=`mailto:yann@heprojects.fr?subject=${encodeURIComponent('Projet '+f.get('type')+' – '+f.get('name'))}&body=${encodeURIComponent(body)}`};
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
